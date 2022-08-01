@@ -1,0 +1,42 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        name: service-gateway
+        file-extension: yml
+
+#spring:
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+#    gateway:
+#      routes:
+#      - id: nacos-route
+#        uri: lb://service-gateway-provider
+#        predicates:
+#        - Path=/nacos/**
+#        filters:
+#        - StripPrefix=1
+#        - name: DecryptRequestBody
+#          args:
+#            name: sampleDecrypt
+#            encDecUri: lb://service-gateway-provider
+#            excludeUris:
+#             - /test
+#             - /auth
+#        - name: EncryptResponseBody
+#          args:
+#            name: sampleEncrypt
+#            timeout: 1
+#            encDecUri: lb://service-gateway-provider
+#            excludeUris:
+#             - /test
+#             - /auth
+
+
