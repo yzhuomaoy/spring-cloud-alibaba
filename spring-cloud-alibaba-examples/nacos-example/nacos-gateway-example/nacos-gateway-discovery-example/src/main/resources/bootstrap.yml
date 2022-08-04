@@ -9,6 +9,39 @@ spring:
         server-addr: 127.0.0.1:8848
         name: service-gateway
         file-extension: yml
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8720
+      log:
+        switch-pid: true
+        dir: /home/user/logs/service-gateway
+      scg:
+        fallback:
+          mode: response
+          response-status: 444
+          response-body: block by ratelimit
+        order: -100
+      datasource:
+        gwflow:
+          nacos:
+            server-addr: 127.0.0.1:8848
+            dataId: service-gateway
+            groupId: gw-flow
+            rule-type: gw-flow
+            namespace: sentinel-control
+        gwapigroup:
+          nacos:
+            server-addr: 127.0.0.1:8848
+            dataId: service-gateway
+            groupId: gw-api-group
+            rule-type: gw-api-group
+            namespace: sentinel-control
+    gateway:
+      httpserver:
+        wiretap: true
+      httpclient:
+        wiretap: true
 
 #spring:
 #  cloud:
